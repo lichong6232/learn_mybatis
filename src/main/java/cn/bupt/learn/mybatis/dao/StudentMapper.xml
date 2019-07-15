@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bupt.learn.mybatis.dao.StudentMapper">
+
+    <delete id="deleteStudentById">
+        DELETE  FROM  student where id=#{id}
+    </delete>
+
+
+    <resultMap id="studentMap" type="cn.bupt.learn.model.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="classNumber" column="class_number"/>
+        <result property="gender" column="gender"/>
+        <result property="studentNumber" column="student_number"/>
+    </resultMap>
+
+
+    <select id="getStudentById" resultType="cn.bupt.learn.model.Student">
+        SELECT * from student where id = #{id}
+    </select>
+
+    <select id="getStudents" resultMap="studentMap">
+        select * from student
+    </select>
+
+    <insert id="saveStudent" parameterType="cn.bupt.learn.model.Student">
+        insert into student(age,class_number,gender,student_number)
+        VALUES (#{age},#{student.classNumber},#{student.gender},#{student.studentNumber})
+    </insert>
+</mapper>
